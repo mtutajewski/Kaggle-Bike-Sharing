@@ -42,7 +42,8 @@ data['count'] = np.log(data['count']+1)
 data['count'].hist(bins=20)
 plt.show()
 
-data['year'], data['month'], data['day'], data['weekday'], data['hour'] = data['datetime'].dt.year, data['datetime'].dt.month, data['datetime'].dt.day, data['datetime'].dt.dayofweek, data['datetime'].dt.hour
+data['year'], data['month'], data['day'], data['weekday'], data['hour'] = data['datetime'].dt.year, 
+data['datetime'].dt.month, data['datetime'].dt.day, data['datetime'].dt.dayofweek, data['datetime'].dt.hour
 data.sort_values('datetime', inplace=True)
 
 
@@ -61,7 +62,8 @@ ax[0][1].set(xlabel='Season', ylabel='Bikes Rented')
 
 sns.boxplot(data=data, x='weekday', y='count', palette='muted', ax=ax[1][0])
 ax[1][0].set(xlabel='Day of the Week', ylabel='Bikes Rented')
-#The number of rentals seems to be quite equally distributed #over the days of the week. There are, however, some days with a #large number of outliers like Tuesday and Wednesday
+#The number of rentals seems to be quite equally distributed #over the days of the week. There are, however, some days with a 
+#large number of outliers like Tuesday and Wednesday
 
 sns.boxplot(data=data, x='hour', y='count', palette='muted', ax=ax[1][1])
 ax[1][1].set(xlabel='Hour', ylabel='Bikes Rented')
@@ -69,11 +71,13 @@ ax[1][1].set(xlabel='Hour', ylabel='Bikes Rented')
 
 sns.boxplot(data=data, x='windspeed', y='count', palette='muted', ax=ax[2][0])
 ax[2][0].set(xlabel='Speed of the Wind', ylabel='Bikes Rented')
-#Does not seem like the windspeed affects decision about renting #a bike. It needs to be stressed out that weather conditions are #not equally distributed!
+#Does not seem like the windspeed affects decision about renting #a bike. It needs to be stressed out that weather conditions are 
+#not equally distributed!
 
 sns.boxplot(data=data, x='humidity', y='count', palette='muted', ax=ax[2][1])
 ax[2][1].set(xlabel='Humidity in %', ylabel='Bikes Rented')
-#People tend to use bikes more often in lower humidity, but this #may also be impacted by the climate rather than their own #decisions.
+#People tend to use bikes more often in lower humidity, but this 
+#may also be impacted by the climate rather than their own #decisions.
 
 plt.show()
 #####################################################################
@@ -89,7 +93,8 @@ train_features = [c for c in data.columns if c not in to_drop]
 train, validation = train_test_split(data, random_state=7, test_size=0.25)
 print(train.shape, validation.shape)
 
-#I have already tested a few classifiers and it turns out that these #three work best for the problem..
+#I have already tested a few classifiers and it turns out that these 
+#three work best for the problem..
 
 #Decision Tree
 from sklearn.tree import DecisionTreeRegressor
@@ -131,15 +136,4 @@ print(models.sort_values(by=['Score'], ascending=True))
 #Submission file
 test['count'] = np.exp(gbr.predict(test[train_features]))
 test[['datetime', 'count']].to_csv('submission.csv', index=False)
-
-
-
-
-
-
-
-
-
-
-
 
